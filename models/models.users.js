@@ -9,12 +9,10 @@ const UserModel = new schema(
       trim: true,
     },
     password: "string",
-    confirm: "string",
-
     role: "string",
   },
   {
     timestamps: true,
   }
 );
-module.exports = mongoose.model("users", UserModel);
+module.exports = mongoose.model("Users", UserModel);
