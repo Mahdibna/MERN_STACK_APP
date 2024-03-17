@@ -1,7 +1,11 @@
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/models.users");
 const jwt = require("jsonwebtoken");
-const { validateRegister, validateLogin } = require("../validation/validator");
+const {
+  validateRegister,
+  validateLogin,
+  validateProfile,
+} = require("../validation/validator");
 const dotenv = require("dotenv");
 dotenv.config();
 const register = async (req, res) => {
@@ -61,11 +65,18 @@ const login = async (req, res) => {
     res.status(404).json(errors);
   }
 };
+const Admin = (req, res) => {
+  res.send("Admin");
+};
+const User = (req, res) => {
+  res.send("User");
+};
 
-const Admin=(req,res)=>{
-  res.send('Admin')
-}
-const User=(req,res)=>{
-  res.send('User')
-}
-module.exports = { register, login, Admin , User};
+
+module.exports = {
+  register,
+  login,
+  Admin,
+  User,
+  
+};
