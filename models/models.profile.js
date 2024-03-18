@@ -1,32 +1,23 @@
 const mongoose = require("mongoose");
-const schema = mongoose.Schema;
-const ProfileModel = new schema(
+const Schema = mongoose.Schema;
+const users = require("./models.users"); // Import the User model schema
+const UserProfile = new Schema(
   {
-    id:{
-        type:"String",
-        trim:true,
-        required:true
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: users,
+      required: true
     },
-    name: {
-        type:"String",
-        trim:true,
-    },
-    last_name:{
-        type:"String",
-        trim:true,
-    },
-    tel_number:{
-        type:"String",
-        trim:true,
-    },
-    email: {
-      type: "string",
-      unique: true,
-      trim: true,
-    },
+    tel_number: "string",
+    city: "string",
+    country: "string",
+    postalcode: "string",
+    bio: "string",
+    address: "string",
   },
   {
     timestamps: true,
   }
 );
-module.exports = mongoose.model("Profile", ProfileModel);
+
+module.exports = mongoose.model("profiles", UserProfile);
