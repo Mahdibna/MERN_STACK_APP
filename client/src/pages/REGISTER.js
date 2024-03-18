@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Inputs from "./Inputs";
 function REGISTER() {
   return (
     <div>
@@ -15,33 +16,10 @@ function REGISTER() {
                 style={{ backgroundColor: "white" }}
               >
                 <form>
-                  <div className="mb-3">
-                    <label className="form-label">Name</label>
-                    <div className="input-group">
-                      <span className="input-group-text" id="basic-addon1">
-                        <i className="fa-solid fa-user"></i>
-                      </span>
-                      <input type="password" className="form-control" />
-                    </div>
-                  </div>
-                  <div className=" mb-3">
-                    <label className="form-label">Email address</label>
-                    <div className="input-group">
-                      <span className="input-group-text" id="basic-addon1">
-                        <i className="fa-solid fa-at"></i>
-                      </span>
-                      <input type="text" className="form-control" />
-                    </div>
-                  </div>
-                  <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <div className="input-group">
-                      <span className="input-group-text" id="basic-addon1">
-                        <i className="fa-solid fa-key"></i>
-                      </span>
-                      <input type="password" className="form-control" />
-                    </div>
-                  </div>
+                <Inputs VALUE={'Name'}  ICON={'fa-user'} TYPE={'text'}/>
+                <Inputs VALUE={'Email address'}  ICON={'fa-at'} TYPE={'email'}/>
+                <Inputs VALUE={'Password'}  ICON={'fa-key'} TYPE={'password'}/>            
+
                   <div className="d-flex justify-content-between">
                     <button type="submit" className="btn btn-outline-primary">
                       Save <i className="fa-solid fa-floppy-disk"></i>

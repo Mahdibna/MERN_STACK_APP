@@ -50,21 +50,27 @@ function validateLogin(data) {
 }
 function validateProfile(data) {
   let errors = {};
-  data.email = isEmpty(data.email) ? "" : data.email;
-  data.name = isEmpty(data.name) ? "" : data.name;
+  data.city = isEmpty(data.city) ? "" : data.city;
+  data.country = isEmpty(data.country) ? "" : data.country;
   data.tel_number = isEmpty(data.tel_number) ? "" : data.tel_number;
-  data.last_name = isEmpty(data.last_name) ? "" : data.last_name;
+  data.postalcode = isEmpty(data.postalcode) ? "" : data.postalcode;
+  data.bio = isEmpty(data.bio) ? "" : data.bio;
+  data.adress = isEmpty(data.adress) ? "" : data.adress;
 
-  if (validator.isEmpty(data.name)) {
-    errors.name = "required name";
+  if (validator.isEmpty(data.city)) {
+    errors.city = "required city";
   }
-  if (validator.isEmpty(data.last_name)) {
-    errors.last_name = "required last name";
+  if (validator.isEmpty(data.country)) {
+    errors.country = "required country";
   }
-  if (validator.isEmpty(data.email)) {
-    errors.email = "required email";
-  } else if (!validator.isEmail(data.email)) {
-    errors.email = "required format email";
+  if (validator.isEmpty(data.postalcode)) {
+    errors.postalcode = "required postalcode";
+  }
+  if (validator.isEmpty(data.bio)) {
+    errors.bio = "required bio";
+  }
+  if (validator.isEmpty(data.adress)) {
+    errors.adress = "required adress";
   }
   if (
     validator.isEmpty(data.tel_number) ||

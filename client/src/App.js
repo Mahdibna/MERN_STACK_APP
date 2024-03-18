@@ -12,7 +12,7 @@ import REGISTER from "./pages/REGISTER";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   const user = {
-    isConnected: true,
+    isConnected: false,
     role: "AD",
   };
   return (
@@ -20,10 +20,41 @@ function App() {
       <div className="bg-light" style={{ height: "100vh" }}>
         <Navbar />
         <Routes>
-          <Route path="/register" element={<Ignored user={user}> <REGISTER/> </Ignored>}/>
-          <Route path="/login" element={<Ignored user={user}> <LOGIN/> </Ignored>}/>
-          <Route path="/Admin"element={ <AdminRouter user={user}>   <ADMIN /> </AdminRouter> }/>
-          <Route path="/" element={<PrivateRoutes user={user}><PROFILE /></PrivateRoutes>}/>
+          <Route
+            path="/register"
+            element={
+              <Ignored user={user}>
+                {" "}
+                <REGISTER />{" "}
+              </Ignored>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Ignored user={user}>
+                {" "}
+                <LOGIN />{" "}
+              </Ignored>
+            }
+          />
+          <Route
+            path="/Admin"
+            element={
+              <AdminRouter user={user}>
+                {" "}
+                <ADMIN />{" "}
+              </AdminRouter>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <PrivateRoutes user={user}>
+                <PROFILE />
+              </PrivateRoutes>
+            }
+          />
           <Route path="*" element={<NotFound />} />
           <Route path="/AccessDenied" element={<AccessDenied />} />
         </Routes>
