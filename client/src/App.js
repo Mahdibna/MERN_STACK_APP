@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import AdminRouter from "./AdminRouter";
 import "./App.css";
 import Ignored from "./Ignored";
@@ -10,22 +11,37 @@ import NotFound from "./pages/NotFound";
 import PROFILE from "./pages/PROFILE";
 import REGISTER from "./pages/REGISTER";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
+import { SET_USER } from "./Redux/types";
+import store from "./Redux/store";
+if (localStorage.getItem("jwt")) {
+  const decoded = jwtDecode(localStorage.getItem("jwt"));
+  store.dispatch({
+    type: SET_USER,
+    payload: decoded,
+  });
+}
 function App() {
-  const user = {
-    isConnected: false,
-    role: "AD",
-  };
+  const store = useSelector((store) => store);
+  const [user, setuser] = useState({
+    isConnected: store.auth.isConnected,
+    role: "ADMIN",
+  });
+  useEffect(() => {
+    setuser({ ...user, isConnected: store.auth.isConnected });
+  }, [store]);
+
   return (
     <Router>
       <div className="bg-light" style={{ height: "100vh" }}>
-        <Navbar />
+        <Navbar user={user} />
         <Routes>
           <Route
             path="/register"
             element={
               <Ignored user={user}>
-                {" "}
-                <REGISTER />{" "}
+                <REGISTER />
               </Ignored>
             }
           />

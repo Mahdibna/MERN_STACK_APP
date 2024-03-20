@@ -24,6 +24,7 @@ const register = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log("error from the server");
     res.status(404).json(error.message);
   }
 };
@@ -31,11 +32,11 @@ const login = async (req, res) => {
   const { errors, isvalid } = validateLogin(req.body);
   if (isvalid) {
     try {
-      await UserModel.findOne({ email: req.body.email }).then((user) => {
+      await UserModel.findOne({ email: req.body.email }).then(async (user) => {
         if (user) {
-          bcrypt.compare(user.password, req.body.password).then((bool) => {
-            if (!bool) {
-              const Token = jwt.sign(
+          bcrypt.compare(req.body.password,user.password).then((match) => {
+            if (match) {
+              const token = jwt.sign(
                 {
                   id: user._id,
                   name: user.name,
@@ -47,10 +48,10 @@ const login = async (req, res) => {
               );
               res
                 .status(200)
-                .json({ message: "user logged successfully", Token: Token });
+                .json({ message: "User logged in successfully", token: "Bearer "+token });
             } else {
-              errors.password = "incorrect password";
-              res.status(404).json(errors);
+              errors.password = "Invalid password";
+              res.status(401).json(errors);
             }
           });
         } else {
@@ -72,11 +73,9 @@ const User = (req, res) => {
   res.send("User");
 };
 
-
 module.exports = {
   register,
   login,
   Admin,
   User,
-  
 };
